@@ -67,7 +67,7 @@ def plot_distribution(variable,data,sm,em,fig):
     sel_plot=np.mean(sel_vals,1)
 
     # Plot the data
-    sns.distplot(np.array(data[:-2]), kde=False,fit=stats.genextreme, color="#00b478",label=variable,fit_kws={"linewidth":2.5,"color":"#00b478"})
+    sns.distplot(np.array(sel_plot), kde=False,fit=stats.genextreme, color="#00b478",label=variable,fit_kws={"linewidth":2.5,"color":"#00b478"})
 
 def plot_seasonal_cycle(variable,data,time,year,fig):
     ax = plt.subplot2grid((3,4),(1,0),colspan=2,rowspan=2)
