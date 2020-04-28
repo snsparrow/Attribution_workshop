@@ -169,9 +169,9 @@ def find_nearest(array,value):
 def main():
     #Read in the command line arguments
     parser = argparse.ArgumentParser()
-    parser.add_argument("fname", help="The filename including path of the 1D data.")
-    parser.add_argument("variable", help="The variable name")
-    parser.add_argument("year", type=int, help="The year of interest that the extreme event ocurred in")
+    parser.add_argument("--fname", help="The filename including path of the 1D data.")
+    parser.add_argument("--variable", help="The variable name")
+    parser.add_argument("--year", type=int, help="The year of interest that the extreme event ocurred in")
     parser.add_argument("--dirn", default="descending", help="The direction of the variable.  'Descending' for a variable where the threshold is exceeded (default) and 'ascending' where the threshold is less than a given value.")
     parser.add_argument("--smth", default="Jan", help="The start month for the return time plot, default 'Jan'")
     parser.add_argument("--emth", default="Dec", help="The end month for the return time plot, default 'Dec'")
