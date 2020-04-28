@@ -193,7 +193,8 @@ def main():
     plot_return_time(args.variable,data,time,args.year,args.dirn,args.smth,args.emth,fig)
     plt.tight_layout()
     fig.savefig("Timeseries_analysis_"+args.variable+".png",dpi=28.75*2)
-
+    plt.show()
+	
     print('Finished!')
 
 #Washerboard function that allows main() to run on running this file
