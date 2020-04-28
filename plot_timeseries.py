@@ -193,7 +193,6 @@ def main():
     plot_return_time(args.variable,data,time,args.year,args.dirn,args.start_month,args.end_month,fig)
     plt.tight_layout()
     fig.savefig("Timeseries_analysis_"+args.variable+".png",dpi=28.75*2)
-    plt.show()
 	
     print('Finished!')
 
