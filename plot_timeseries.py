@@ -51,11 +51,21 @@ def plot_tseries(variable,data,time,fig):
     ax.plot(time,y,color="black")
 
 
-def plot_distribution(variable,data,fig):
+def plot_distribution(variable,data,sm,em,fig):
     ax = plt.subplot2grid((3,4),(0,0)) 
     plt.setp(ax.get_xticklabels(),fontsize=16)
     plt.setp(ax.get_yticklabels(),fontsize=16)
-    plt.title("(a) "+variable)
+    plt.title("(a) "+variable+" "+sm+"-"+em+" mean")
+
+    # Convert month abbreviation to index
+    s=list(calendar.month_abbr).index(sm)
+    e=list(calendar.month_abbr).index(em)
+
+    # Reshape the data and mean the chosen months
+    vals=np.reshape(data,(-1,12))
+    sel_vals=vals[:,s:e]
+    sel_plot=np.mean(sel_vals,1)
+
     # Plot the data
     sns.distplot(np.array(data[:-2]), kde=False,fit=stats.genextreme, color="#00b478",label=variable,fit_kws={"linewidth":2.5,"color":"#00b478"})
 
@@ -89,7 +99,7 @@ def plot_seasonal_cycle(variable,data,time,year,fig):
 def plot_return_time(variable,data,time,year,dirn,sm,em,fig):
     # Plot the return time for the selected period
     ax = plt.subplot2grid((3,4),(1,2),colspan=2,rowspan=2)
-    plt.title("(d) "+variable+" "+sm+"-"+em)
+    plt.title("(d) "+variable+" "+sm+"-"+em+" mean")
     ax.set_ylabel(variable,fontsize=16)
     ax.set_xlabel("Chance of event occurring in a given year",fontsize=16)
     plt.setp(ax.get_xticklabels(),fontsize=16)
@@ -173,8 +183,8 @@ def main():
     parser.add_argument("--variable", help="The variable name")
     parser.add_argument("--year", type=int, help="The year of interest that the extreme event ocurred in")
     parser.add_argument("--dirn", default="descending", help="The direction of the variable.  'Descending' for a variable where the threshold is exceeded (default) and 'ascending' where the threshold is less than a given value.")
-    parser.add_argument("--start_month", default="Jan", help="The start month for the return time plot, default 'Jan'")
-    parser.add_argument("--end_month", default="Dec", help="The end month for the return time plot, default 'Dec'")
+    parser.add_argument("--start_month", default="Jan", help="The start month for the distribution and return time plot, default 'Jan'")
+    parser.add_argument("--end_month", default="Dec", help="The end month for the distribution and return time plot, default 'Dec'")
     args = parser.parse_args()
 
     # Set up the plot
@@ -187,7 +197,7 @@ def main():
 
     data,time=read_data(args.fname,args.variable)
 
-    plot_distribution(args.variable,data,fig)
+    plot_distribution(args.variable,data,args.start_month, args.end_month,fig)
     plot_tseries(args.variable,data,time,fig)
     plot_seasonal_cycle(args.variable,data,time,args.year,fig)
     plot_return_time(args.variable,data,time,args.year,args.dirn,args.start_month,args.end_month,fig)
