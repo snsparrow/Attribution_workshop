@@ -190,7 +190,7 @@ def main():
     plot_distribution(args.variable,data,fig)
     plot_tseries(args.variable,data,time,fig)
     plot_seasonal_cycle(args.variable,data,time,args.year,fig)
-    plot_return_time(args.variable,data,time,args.year,dirn,args.smth,args.emth,fig)
+    plot_return_time(args.variable,data,time,args.year,args.dirn,args.smth,args.emth,fig)
     plt.tight_layout()
     fig.savefig("Timeseries_analysis_"+args.variable+".png",dpi=28.75*2)
 
