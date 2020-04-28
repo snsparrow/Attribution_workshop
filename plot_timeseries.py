@@ -173,8 +173,8 @@ def main():
     parser.add_argument("--variable", help="The variable name")
     parser.add_argument("--year", type=int, help="The year of interest that the extreme event ocurred in")
     parser.add_argument("--dirn", default="descending", help="The direction of the variable.  'Descending' for a variable where the threshold is exceeded (default) and 'ascending' where the threshold is less than a given value.")
-    parser.add_argument("--smth", default="Jan", help="The start month for the return time plot, default 'Jan'")
-    parser.add_argument("--emth", default="Dec", help="The end month for the return time plot, default 'Dec'")
+    parser.add_argument("--start_month", default="Jan", help="The start month for the return time plot, default 'Jan'")
+    parser.add_argument("--end_month", default="Dec", help="The end month for the return time plot, default 'Dec'")
     args = parser.parse_args()
 
     # Set up the plot
@@ -190,7 +190,7 @@ def main():
     plot_distribution(args.variable,data,fig)
     plot_tseries(args.variable,data,time,fig)
     plot_seasonal_cycle(args.variable,data,time,args.year,fig)
-    plot_return_time(args.variable,data,time,args.year,args.dirn,args.smth,args.emth,fig)
+    plot_return_time(args.variable,data,time,args.year,args.dirn,args.start_month,args.end_month,fig)
     plt.tight_layout()
     fig.savefig("Timeseries_analysis_"+args.variable+".png",dpi=28.75*2)
     plt.show()
