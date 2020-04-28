@@ -27,7 +27,7 @@ def read_data(fname,variable):
     vals=data.variables[variable.lower()][:]
     vals=np.array(vals.flatten())
     # Uncomment below and adjust if reading of time variable does not work correclty. 
-    #time=np.arange('1979-01', '2020-01', dtype='datetime64[M]')
+    time=np.arange('1979-01', '2020-01', dtype='datetime64[M]')
 
     return vals,time
 
