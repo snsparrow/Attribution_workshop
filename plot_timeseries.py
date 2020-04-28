@@ -26,7 +26,8 @@ def read_data(fname,variable):
     time=netCDF4.num2date(times[:],times.units,times.calendar)
     vals=data.variables[variable.lower()][:]
     vals=np.array(vals.flatten())
-    # Uncomment below and adjust if reading of time variable does not work correclty. 
+    # Below included for monthly datetime time variable and was included because initial read of time variable did not work correclty. 
+    # Change date ranges below as required to fit input data
     time=np.arange('1979-01', '2020-01', dtype='datetime64[M]')
 
     return vals,time
@@ -61,9 +62,11 @@ def plot_distribution(variable,data,sm,em,fig):
     s=list(calendar.month_abbr).index(sm)
     e=list(calendar.month_abbr).index(em)
 
-    # Reshape the data and mean the chosen months
+    # Reshape the data and mean the chosen months.  
+    # Note this reshaping will be different if daily data is used and will need to be amended accordingly.
     vals=np.reshape(data,(-1,12))
     sel_vals=vals[:,s:e]
+    # Change np.mean to np.max or np.min as required.
     sel_plot=np.mean(sel_vals,1)
 
     # Plot the data
@@ -74,6 +77,7 @@ def plot_seasonal_cycle(variable,data,time,year,fig):
     plt.setp(ax.get_xticklabels(),fontsize=16)
     plt.setp(ax.get_yticklabels(),fontsize=16)
 
+    # Note this reshaping will be different if daily data is used and will need to be amended accordingly.
     vals=np.reshape(data,(-1,12))
     times=np.reshape(time,(-1,12))
 
@@ -88,6 +92,7 @@ def plot_seasonal_cycle(variable,data,time,year,fig):
     ax.fill_between(months,mm_val+mm_std,mm_val-mm_std,color="gold",alpha=0.3)
 
     for i in range(0,40):
+	# Adjust 1979 to reflect the start year of the data
         if i+1979 in [year]:
                 col="black"
                 width=1
@@ -105,6 +110,8 @@ def plot_return_time(variable,data,time,year,dirn,sm,em,fig):
     plt.setp(ax.get_xticklabels(),fontsize=16)
     plt.setp(ax.get_yticklabels(),fontsize=16)
     ax.set_xlim(1,1e2)
+
+    # Note this reshaping will be different if daily data is used and will need to be amended accordingly.
     vals=np.reshape(data,(-1,12))
     times=np.reshape(time,(-1,12))
 
@@ -113,9 +120,10 @@ def plot_return_time(variable,data,time,year,dirn,sm,em,fig):
     e=list(calendar.month_abbr).index(em)
 
     sel_vals=vals[:,s:e]
+    # Change np.mean to np.max or np.min as required.
     sel_plot=np.mean(sel_vals,1)
 
-    # Calculate the threshold for the given year
+    # Calculate the threshold for the given year.  Adjust the start year of 1979 in the data as required
     threshold=sel_plot[year-1979]
     print(str(year)+" Threshold: "+str(threshold))
 
