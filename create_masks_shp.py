@@ -1,10 +1,10 @@
 #!/usr/bin/env python
 #############################################################################
-# Program : create_mask_txt_shp.py
+# Program : create_masks_shp.py
 # Author  : Sihan Li
 # Date    : 06/04/2019
 # Purpose : Create a netCDF mask for a shapefile
-# Updates : Updated 11/05/2020 Sarah Sparrow to include command line argument parsing
+# Updates : Updated 11/05/2020 Sarah Sparrow  - inclusion of command line argument parsing and limitation of code to shapefiles alone.
 #############################################################################
 import numpy as np
 import argparse
