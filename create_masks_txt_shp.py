@@ -69,10 +69,10 @@ def load_shapefile(shapefile,fieldname,field_list=None):
 
 	layerDefinition = layer.GetLayerDefn()
 
-
+	print("\nShapefile Field Definitions:")
 	for i in range(layerDefinition.GetFieldCount()):
     		print(layerDefinition.GetFieldDefn(i).GetName())
-	print("\n")
+	print("\nLayers:")
 	for feature in layer:
 		try:
 			region=feature.GetField(fieldname)
