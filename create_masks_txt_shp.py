@@ -437,7 +437,7 @@ def main():
 
 
     # Create mask for each layer in shapefile
-    create_masks(args.f_grid,args.shapefile,args.fieldname,args.latname,args.lonname,args.template_var,plot=True, netcdf_out=True)
+    create_masks(args.f_grid,args.shapefile,args.shapefield,args.latname,args.lonname,args.template_var,plot=True, netcdf_out=True)
 
 #Washerboard function that allows main() to run on running this file
 if __name__=='__main__':
