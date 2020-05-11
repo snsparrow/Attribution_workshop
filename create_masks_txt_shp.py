@@ -12,40 +12,12 @@ from matplotlib.path import Path
 from netCDF4 import Dataset
 import matplotlib.pyplot as plt
 import matplotlib.cm as cm
-from mpl_toolkits.basemap import Basemap,cm
+import cartopy.crs as ccrs
+import cartopy.feature as cfeature
 import os
 import unicodedata
 
 from osgeo import ogr
-
-####################################################################################
-
-# Load a text file containing lists of vertices (space separated, one vertex per line)
-# Creates matplotlib.path.Path objects representing the polygons. 
-# Lines starting with '#' are ignored
-# A blank line indicates the end of a polygon, so multiple polygons can be defined with new lines in between
-def load_polygons(fname):
-	polygons=[]
-	tmp=[]
-	# Import Polygons of mask in fname (separate polygons are separated by a blank line)
-	for line in open(fname,'r'):
-		if line[0]=='#': 
-			# skip commented lines
-			continue
-		elif line.strip()!='':
-			# Add coordinates to list
-			tuple=line.strip().split()
-			tmp.append(tuple) # lon,lat
-		else: # blank line
-			# Finished reading data for this polygon
-			# create polygon path out of list of vertices
-			if tmp !=[]:
-				polygons.append(Path(np.array(tmp)))
-				tmp=[]
-	# If the file didn't end in a blank line, add the final polygon
-	if tmp !=[]:
-		polygons.append(Path(np.array(tmp)))
-	return polygons
 
 ###################################################################################
 
@@ -85,27 +57,6 @@ def create_mask(polygons,points,nlat,nlon):
 
 #################################################################################
 
-# Wrapper function to return the mask givent the polygons file and grid file
-def load_and_create_mask(f_polygons,f_grid,latname='latitude0',lonname='longitude0'):
-	# Load inputs and create mask
-	polygons=load_polygons(f_polygons)
-	# Load 2D lon and lat arrays for grid
-	lonxx,latyy=load_grid(f_grid,latname,lonname)
-	nlat,nlon=lonxx.shape
-	# Stack points into a N x 2 array (where N = nlat x nlon)
-	points = np.vstack((lonxx.flatten(),latyy.flatten())).T
-	# Call create_mask function for polygons and grid points
-	return create_mask(polygons,points,nlat,nlon)
-
-#################################################################################
-
-def add_to_text(fileh,polygon):
-	for coord in polygon.vertices:
-		fileh.write(str(coord[0])+' '+str(coord[1])+'\n')
-	fileh.write('\n')
-
-#################################################################################
-
 def load_shapefile(shapefile,fieldname,field_list=None):
 	
 	print('Loading Shapefile ',shapefile)
@@ -121,7 +72,7 @@ def load_shapefile(shapefile,fieldname,field_list=None):
 
 	for i in range(layerDefinition.GetFieldCount()):
     		print(layerDefinition.GetFieldDefn(i).GetName())
-	
+	print("\n")
 	for feature in layer:
 		try:
 			region=feature.GetField(fieldname)
@@ -150,6 +101,7 @@ def load_shapefile(shapefile,fieldname,field_list=None):
 
 		if region is not None and boundary is not None:
 			counties[region]=polygons
+	
 	return counties
 
 ################################################################################
@@ -178,40 +130,7 @@ def create_netcdf(template,data,outname,template_var='pr'):
 	#outfile.flush()
 	outfile.close()
 
-############################################################################
-
-
-# Create a textfile of polygons, combining multiple fields from the shapefile
 #
-# Input Arguments:
-# shapefile: path of shapefile containing polygons
-# fieldname: attribute name in shapefile used to identify each field. 
-# field_list: (optional)- specify a list (subset) of fields to include in the mask, otherwise the mask combines all fields
-# region_name: (optional)- name of region used in output filename
-#
-def create_combined_textfiles(shapefile, fieldname, field_list=None, region_name='region'):
-
-	# first create folder (if needed)
-	if not os.path.exists('masks_text'):
-		os.mkdir('masks_text')
-
-	# Load Shape file
-	regions=load_shapefile(shapefile,fieldname,field_list=field_list)
-
-	print('Looping over regions and combining masks')
-	# Either loop over all regions, or list of regions specified by 'field_list'
-	if field_list == None:
-		field_list = iter(regions.keys())
-	
-	with open('masks_text/mask_'+region_name+'.txt','w') as text_polygons:
-		for region in field_list:
-			print(fieldname,'=',region)			
-			polygons = regions[region]
-
-			# Add polygon to text file
-			for p in polygons:
-				add_to_text(text_polygons,p)
-			
 ###############################################################################
 
 # Create a number of masks, from the shapefile, for a specific grid
@@ -229,15 +148,13 @@ def create_combined_textfiles(shapefile, fieldname, field_list=None, region_name
 #
 def create_masks(f_grid, shapefile, fieldname, field_list=None, latname='lat',lonname='lon',template_var='pr', plot=False, netcdf_out = False):
 
-	# first create folders (if needed)
-	if plot and not os.path.exists('plots'):
-		os.mkdir('plots')
+	# first create folder (if needed)
 	if netcdf_out and not os.path.exists('masks_netcdf'):
 		os.mkdir('masks_netcdf')
 
 	# Load Shape file
 	regions=load_shapefile(shapefile,fieldname,field_list=field_list)
-
+	
 	# Load lat lon grid (for mask)
 	lonxx,latyy=load_grid(f_grid,latname=latname,lonname=lonname)
 	nlat,nlon=lonxx.shape
@@ -248,18 +165,13 @@ def create_masks(f_grid, shapefile, fieldname, field_list=None, latname='lat',lo
 	# Turn lat and lon into a list of coordinates
 	points = np.vstack((lonxx.flatten(),latyy.flatten())).T
 
-	if plot:
-		# Set up Basemap projection (may need fine tuning)
-		m = Basemap(projection = 'robin',lon_0=180)
-		xx,yy=m(lonxx,latyy) # basemap coordinates
-
 	# Either loop over all regions, or list of regions specified by 'field_list'
 	if field_list == None:
 		field_list = iter(regions.keys())
 
 	# Dictionary of masks
 	masks={}
-
+	
 	# Do the loop
 	print('Looping over regions and creating gridded masks')
 	for region in field_list:
@@ -277,151 +189,25 @@ def create_masks(f_grid, shapefile, fieldname, field_list=None, latname='lat',lo
 			create_netcdf(Dataset(f_grid,'r'),mask,'masks_netcdf/mask_'+region+'.nc', template_var=template_var)
 
 		if plot:
-			plt.clf()
-			m.contourf(xx,yy,mask)
-			plt.colorbar()
-			m.drawcoastlines(linewidth=0.2)
-			m.drawcountries(linewidth=0.2)
-			plt.title('Mask: '+region)
-			plt.savefig('plots/mask_'+region+'.png')
+			plot_mask(lonxx,latyy, mask,region,plot)
+
 
 	return masks
 
-#############################################################################
-
-# Create a mask, combining multiple fields from a shapefile, for a specific grid
-# Area outside the polygons is True/1, area inside the polygons is False/0
-#
-# Input Arguments:
-# f_grid: filename of netcdf file contatining grid information
-# latname, lonname, template_var: variable names for latitude, longitude and a template variable in f_grid netcdf file
-# shapefile: path of shapefile containing polygons
-# fieldname: attribute name in shapefile used to identify each field. 
-# field_list: (optional)- specify a list (subset) of fields to include in the mask, otherwise the mask combines all fields
-# plot, netcdf_out: (optional) booleans- whether or not to create output plot and/or output netcdf file
-# region_name: (optional)- name of region in output files
-# 
-# Returns array of the combined mask
-#
-def create_mask_combined(f_grid,shapefile,fieldname,field_list=None,region_name='region',latname='lat',lonname='lon',template_var='fwi', plot=False,netcdf_out=False):
-
-	# first create folders (if needed)
+def plot_mask(lons,lats, mask,region,plot):
+	# first create folder (if needed)
 	if plot and not os.path.exists('plots'):
 		os.mkdir('plots')
-	if netcdf_out and not os.path.exists('masks_netcdf'):
-		os.mkdir('masks_netcdf')
-
-	# Load Shape file
-	regions=load_shapefile(shapefile,fieldname,field_list=field_list)
-
-	# Load lat lon grid (for mask)
-	lonxx,latyy=load_grid(f_grid,latname=latname,lonname=lonname)
-	nlat,nlon=lonxx.shape
-	# Update lon to be from -180 to 180 
-	# NOTE: (this is only if the shapefile uses lat coordinates from -180-180 )
-	# Comment out otherwise
-	lonxx[lonxx>180]=lonxx[lonxx>180]-360
-	# Turn lat and lon into a list of coordinates
-	points = np.vstack((lonxx.flatten(),latyy.flatten())).T
-
-
-	combined_mask = np.zeros([nlat,nlon])
-	if plot:
-		# Set up Basemap projection (may need fine tuning)
-		m = Basemap(projection = 'robin',lon_0=180)
-		xx,yy=m(lonxx,latyy) # basemap coordinates
-		plot_mask = np.zeros([nlat,nlon])
-
-	print('Looping over regions and combining masks')
-	# Either loop over all regions, or list of regions specified by 'field_list'
-	if field_list == None:
-		field_list = iter(regions.keys())
-
-	i=1
-	for region in field_list:
-		print(fieldname,'=',region)			
-		polygons = regions[region]
-		
-		# Create mask out of polygon, matching points from grid
-		mask = create_mask(polygons,points,nlat,nlon)
-		print(mask.shape)
-		combined_mask = combined_mask + (mask-1)*-1
-		if plot:
-			plot_mask = plot_mask + (mask-1)*-i
-		i+=1
 	
-	# Create netcdf for combined mask
-	if netcdf_out:
-		create_netcdf(Dataset(f_grid,'r'),combined_mask,'masks_netcdf/mask_'+region_name+'.nc',template_var=template_var)
+	plt.clf()	
+	ax = plt.axes(projection=ccrs.PlateCarree())
+	ax.coastlines()	
+	ax.add_feature(cfeature.BORDERS)
 
-	if plot:
-		plt.clf()
-		m.contourf(xx,yy,plot_mask)
-		plt.colorbar()
-		m.drawcoastlines(linewidth=0.2)
-		m.drawcountries(linewidth=0.2)
-		plt.title('Mask: '+region_name)
-		plt.savefig('plots/mask_'+region_name+'.png')
-
-	return mask
-
-#############################################################################
-
-# Create a mask, from textfile for a specific grid
-# Area outside the polygons is True/1, area inside the polygons is False/0
-#
-# Input Arguments:
-# f_grid: (filename of netcdf file contatining grid information)
-# textfile: path of text file containing coordinates of polygons
-# latname, lonname, template_var: variable names for latitude, longitude and a template variable in f_grid netcdf file
-# plot, netcdf_out: (optional) booleans- whether or not to create output plot and/or output netcdf file
-# 
-# Returns: mask array 
-#
-def create_mask_fromtext(f_grid, textfile, region_name='region', latname='lat', lonname='lon', template_var='pr', plot=False, netcdf_out=False):
-
-	# first create folders (if needed)
-	if plot and not os.path.exists('plots'):
-		os.mkdir('plots')
-	if netcdf_out and not os.path.exists('masks_netcdf'):
-		os.mkdir('masks_netcdf')
-
-	# Load Shape file
-	polygons=load_polygons(textfile)
-
-	# Load lat lon grid (for mask)
-	lonxx,latyy=load_grid(f_grid,latname=latname,lonname=lonname)
-	nlat,nlon=lonxx.shape
-	# Update lon to be from -180 to 180 
-	# NOTE: (this is only if the shapefile uses lat coordinates from -180-180 )
-	# Comment out otherwise
-	lonxx[lonxx>180]=lonxx[lonxx>180]-360
-	# Turn lat and lon into a list of coordinates
-	points = np.vstack((lonxx.flatten(),latyy.flatten())).T
-
-	if plot:
-		# Set up Basemap projection (may need fine tuning)
-		m = Basemap(projection = 'robin',lon_0=180)
-		xx,yy=m(lonxx,latyy) # basemap coordinates
-		plot_mask = np.zeros([nlat,nlon])
-
-	# Create mask out of polygon, matching points from grid
-	mask = create_mask(polygons,points,nlat,nlon)
-
-	# Create netcdf for combined mask
-	if netcdf_out:
-		create_netcdf(Dataset(f_grid,'r'),mask,'masks_netcdf/mask_'+region_name+'.nc',template_var=template_var)
-
-	if plot:
-		plt.clf()
-		m.contourf(xx,yy,mask)
-		plt.colorbar()
-		m.drawcoastlines(linewidth=0.2)
-		m.drawcountries(linewidth=0.2)
-		plt.title('Mask: '+region_name)
-		plt.savefig('plots/mask_'+region_name+'.png')
-
-	return mask
+	cm=ax.contourf(lons, lats, mask) 
+		
+	plt.title('Mask: '+region)
+	plt.savefig('plots/mask_'+region+'.png')
 
 
 def main():
@@ -437,7 +223,7 @@ def main():
 
 
     # Create mask for each layer in shapefile
-    create_masks(args.f_grid,args.shapefile,args.shapefield,args.latname,args.lonname,args.template_var,plot=True, netcdf_out=True)
+    create_masks(args.f_grid,args.shapefile,args.shapefield,latname=args.latname,lonname=args.lonname,template_var=args.template_var,plot=True, netcdf_out=True)
 
 #Washerboard function that allows main() to run on running this file
 if __name__=='__main__':
