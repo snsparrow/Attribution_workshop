@@ -1,0 +1,514 @@
+<?xml version="1.0" encoding="UTF-8"?><MD_Metadata xmlns:xlink="http://www.w3.org/1999/xlink" xmlns:srv="http://www.isotc211.org/2005/srv" xmlns:gts="http://www.isotc211.org/2005/gts" xmlns:xalan="http://xml.apache.org/xalan" xmlns:gco="http://www.isotc211.org/2005/gco" xmlns:gml="http://www.opengis.net/gml" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.isotc211.org/2005/gmd">
+<characterSet>
+<MD_CharacterSetCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_CharacterSetCode" codeListValue="utf8" codeSpace="ISOTC211/19115">utf8</MD_CharacterSetCode>
+</characterSet>
+<hierarchyLevel>
+<MD_ScopeCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_ScopeCode" codeListValue="dataset" codeSpace="ISOTC211/19115">dataset</MD_ScopeCode>
+</hierarchyLevel>
+<hierarchyLevelName>
+<gco:CharacterString>dataset</gco:CharacterString>
+</hierarchyLevelName>
+<contact gco:nilReason="missing"/>
+<dateStamp gco:nilReason="missing"/>
+<metadataStandardName>
+<gco:CharacterString>ISO 19139 Geographic Information - Metadata - Implementation Specification</gco:CharacterString>
+</metadataStandardName>
+<metadataStandardVersion>
+<gco:CharacterString>2007</gco:CharacterString>
+</metadataStandardVersion>
+<identificationInfo>
+<MD_DataIdentification>
+<citation>
+<CI_Citation>
+<title>
+<gco:CharacterString>Brazil biomes</gco:CharacterString>
+</title>
+<date gco:nilReason="missing"/>
+<identifier>
+<MD_Identifier>
+<authority>
+<CI_Citation>
+<title gco:nilReason="missing"/>
+<date gco:nilReason="missing"/>
+<identifier>
+<MD_Identifier>
+<authority>
+<CI_Citation>
+<title gco:nilReason="missing"/>
+<date gco:nilReason="missing"/>
+</CI_Citation>
+</authority>
+<code gco:nilReason="missing"/>
+</MD_Identifier>
+</identifier>
+</CI_Citation>
+</authority>
+<code gco:nilReason="missing"/>
+</MD_Identifier>
+</identifier>
+<citedResponsibleParty>
+<CI_ResponsibleParty>
+<contactInfo>
+<CI_Contact>
+<onlineResource>
+<CI_OnlineResource>
+<linkage>
+<URL>withheld</URL>
+</linkage>
+</CI_OnlineResource>
+</onlineResource>
+</CI_Contact>
+</contactInfo>
+</CI_ResponsibleParty>
+</citedResponsibleParty>
+<otherCitationDetails>
+<gco:CharacterString>MMA/IGBE. "Brazil biomes." Accessed through Global Forest Watch on [date]. www.globalforestwatch.org.</gco:CharacterString>
+</otherCitationDetails>
+</CI_Citation>
+</citation>
+<abstract>
+<gco:CharacterString>This data set displays the boundaries of six Brazilian continental biomes: the Amazônia, Cerrado, Caatinga, Mata Atlântica, Pantanal and Pampa. “Biome” is defined as a collection of life (plant and animal) constituted by the grouping of contiguous vegetation types identifiable on a regional scale with similar geoclimatic conditions and shared history, which results in a unique biological diversity. The names used were the most common and popular in general associated with the predominant type of vegetation or relief, as in the case of Pantanal biome, which is the highest provincial flooded surface of the world.The Amazon Biome is defined by the climatic region, forest physiognomy and geographic location. The Atlantic Forest biome, which occupies the entire Brazilian continental east Atlantic coast and stretches inland in the Southeast and South, is defined by the predominant forest vegetation and diverse relief. The Pampa, restricted to Rio Grande do Sul, is defined by a set of field vegetation in plain relief. The predominant vegetation in the Cerrado biome in Brazil, second in size, extends from the Maranhão coast to the Midwest and the Caatinga Biome, typical of semi-arid climate of the northeastern backlands. The map is a result of a partnership between the Brazilian Ministry of Environemnt (MMA) and the Brazilian Institute of Geography and Statistics (IBGE).</gco:CharacterString>
+</abstract>
+<purpose>
+<gco:CharacterString>Shows the boundaries of the six Brazilian continental biomes – Amazônia, Cerrado, Caatinga, Mata Atlântica, Pantanal, and Pampa</gco:CharacterString>
+</purpose>
+<pointOfContact>
+<CI_ResponsibleParty>
+<contactInfo>
+<CI_Contact>
+<onlineResource>
+<CI_OnlineResource>
+<linkage>
+<URL>withheld</URL>
+</linkage>
+</CI_OnlineResource>
+</onlineResource>
+</CI_Contact>
+</contactInfo>
+</CI_ResponsibleParty>
+</pointOfContact>
+<resourceMaintenance>
+<MD_MaintenanceInformation>
+<maintenanceAndUpdateFrequency gco:nilReason="missing"/>
+</MD_MaintenanceInformation>
+</resourceMaintenance>
+<language gco:nilReason="missing"/>
+<characterSet>
+<MD_CharacterSetCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#MD_CharacterSetCode" codeListValue="utf8" codeSpace="ISOTC211/19115">utf8</MD_CharacterSetCode>
+</characterSet>
+<extent>
+<EX_Extent>
+<description>
+<gco:CharacterString>Continental Brazil</gco:CharacterString>
+</description>
+</EX_Extent>
+</extent>
+<supplementalInformation>
+<gco:CharacterString>&lt;p&gt;&lt;/p&gt;</gco:CharacterString>
+</supplementalInformation>
+</MD_DataIdentification>
+</identificationInfo>
+<distributionInfo>
+<MD_Distribution>
+<transferOptions>
+<MD_DigitalTransferOptions>
+<onLine>
+<CI_OnlineResource>
+<linkage>
+<URL>http://www.ibge.gov.br/home/presidencia/noticias/21052004biomashtml.shtm</URL>
+</linkage>
+<name>
+<gco:CharacterString>Learn More</gco:CharacterString>
+</name>
+<function>
+<CI_OnLineFunctionCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_OnLineFunctionCode" codeListValue="download" codeSpace="ISOTC211/19115">download</CI_OnLineFunctionCode>
+</function>
+</CI_OnlineResource>
+</onLine>
+<onLine>
+<CI_OnlineResource>
+<linkage>
+<URL>http://gfw2-data.s3.amazonaws.com/country/bra/zip/bra_biomes.zip</URL>
+</linkage>
+<name>
+<gco:CharacterString>Direct Download</gco:CharacterString>
+</name>
+<function>
+<CI_OnLineFunctionCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_OnLineFunctionCode" codeListValue="download" codeSpace="ISOTC211/19115">download</CI_OnLineFunctionCode>
+</function>
+</CI_OnlineResource>
+</onLine>
+<onLine>
+<CI_OnlineResource>
+<linkage>
+<URL>http://gfw2-data.s3.amazonaws.com/country/bra/zip/bra_biomes.zip</URL>
+</linkage>
+<name>
+<gco:CharacterString>Direct Download</gco:CharacterString>
+</name>
+<function>
+<CI_OnLineFunctionCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_OnLineFunctionCode" codeListValue="download" codeSpace="ISOTC211/19115">download</CI_OnLineFunctionCode>
+</function>
+</CI_OnlineResource>
+</onLine>
+<onLine>
+<CI_OnlineResource>
+<linkage>
+<URL>http://gfw2-data.s3.amazonaws.com/country/bra/zip/bra_biomes.zip</URL>
+</linkage>
+<name>
+<gco:CharacterString>Direct Download</gco:CharacterString>
+</name>
+<function>
+<CI_OnLineFunctionCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_OnLineFunctionCode" codeListValue="download" codeSpace="ISOTC211/19115">download</CI_OnLineFunctionCode>
+</function>
+</CI_OnlineResource>
+</onLine>
+<onLine>
+<CI_OnlineResource>
+<linkage>
+<URL>http://gfw2-data.s3.amazonaws.com/country/bra/zip/bra_biomes.zip</URL>
+</linkage>
+<name>
+<gco:CharacterString>Direct Download</gco:CharacterString>
+</name>
+<function>
+<CI_OnLineFunctionCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_OnLineFunctionCode" codeListValue="download" codeSpace="ISOTC211/19115">download</CI_OnLineFunctionCode>
+</function>
+</CI_OnlineResource>
+</onLine>
+<onLine>
+<CI_OnlineResource>
+<linkage>
+<URL>http://gfw2-data.s3.amazonaws.com/country/bra/zip/bra_biomes.zip</URL>
+</linkage>
+<name>
+<gco:CharacterString>Direct Download</gco:CharacterString>
+</name>
+<function>
+<CI_OnLineFunctionCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_OnLineFunctionCode" codeListValue="download" codeSpace="ISOTC211/19115">download</CI_OnLineFunctionCode>
+</function>
+</CI_OnlineResource>
+</onLine>
+<onLine>
+<CI_OnlineResource>
+<linkage>
+<URL>http://gfw2-data.s3.amazonaws.com/country/bra/zip/bra_biomes.zip</URL>
+</linkage>
+<name>
+<gco:CharacterString>Direct Download</gco:CharacterString>
+</name>
+<function>
+<CI_OnLineFunctionCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_OnLineFunctionCode" codeListValue="download" codeSpace="ISOTC211/19115">download</CI_OnLineFunctionCode>
+</function>
+</CI_OnlineResource>
+</onLine>
+<onLine>
+<CI_OnlineResource>
+<linkage>
+<URL>http://gfw2-data.s3.amazonaws.com/country/bra/zip/bra_biomes.zip</URL>
+</linkage>
+<name>
+<gco:CharacterString>Direct Download</gco:CharacterString>
+</name>
+<function>
+<CI_OnLineFunctionCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_OnLineFunctionCode" codeListValue="download" codeSpace="ISOTC211/19115">download</CI_OnLineFunctionCode>
+</function>
+</CI_OnlineResource>
+</onLine>
+<onLine>
+<CI_OnlineResource>
+<linkage>
+<URL>http://gfw2-data.s3.amazonaws.com/country/bra/zip/bra_biomes.zip</URL>
+</linkage>
+<name>
+<gco:CharacterString>Direct Download</gco:CharacterString>
+</name>
+<function>
+<CI_OnLineFunctionCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_OnLineFunctionCode" codeListValue="download" codeSpace="ISOTC211/19115">download</CI_OnLineFunctionCode>
+</function>
+</CI_OnlineResource>
+</onLine>
+<onLine>
+<CI_OnlineResource>
+<linkage>
+<URL>http://gfw2-data.s3.amazonaws.com/country/bra/zip/bra_biomes.zip</URL>
+</linkage>
+<name>
+<gco:CharacterString>Direct Download</gco:CharacterString>
+</name>
+<function>
+<CI_OnLineFunctionCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_OnLineFunctionCode" codeListValue="download" codeSpace="ISOTC211/19115">download</CI_OnLineFunctionCode>
+</function>
+</CI_OnlineResource>
+</onLine>
+<onLine>
+<CI_OnlineResource>
+<linkage>
+<URL>http://gfw2-data.s3.amazonaws.com/country/bra/zip/bra_biomes.zip</URL>
+</linkage>
+<name>
+<gco:CharacterString>Direct Download</gco:CharacterString>
+</name>
+<function>
+<CI_OnLineFunctionCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_OnLineFunctionCode" codeListValue="download" codeSpace="ISOTC211/19115">download</CI_OnLineFunctionCode>
+</function>
+</CI_OnlineResource>
+</onLine>
+<onLine>
+<CI_OnlineResource>
+<linkage>
+<URL>http://gfw2-data.s3.amazonaws.com/country/bra/zip/bra_biomes.zip</URL>
+</linkage>
+<name>
+<gco:CharacterString>Direct Download</gco:CharacterString>
+</name>
+<function>
+<CI_OnLineFunctionCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_OnLineFunctionCode" codeListValue="download" codeSpace="ISOTC211/19115">download</CI_OnLineFunctionCode>
+</function>
+</CI_OnlineResource>
+</onLine>
+<onLine>
+<CI_OnlineResource>
+<linkage>
+<URL>http://gfw2-data.s3.amazonaws.com/country/bra/zip/bra_biomes.zip</URL>
+</linkage>
+<name>
+<gco:CharacterString>Direct Download</gco:CharacterString>
+</name>
+<function>
+<CI_OnLineFunctionCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_OnLineFunctionCode" codeListValue="download" codeSpace="ISOTC211/19115">download</CI_OnLineFunctionCode>
+</function>
+</CI_OnlineResource>
+</onLine>
+<onLine>
+<CI_OnlineResource>
+<linkage>
+<URL>http://gfw2-data.s3.amazonaws.com/country/bra/zip/bra_biomes.zip</URL>
+</linkage>
+<name>
+<gco:CharacterString>Direct Download</gco:CharacterString>
+</name>
+<function>
+<CI_OnLineFunctionCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_OnLineFunctionCode" codeListValue="download" codeSpace="ISOTC211/19115">download</CI_OnLineFunctionCode>
+</function>
+</CI_OnlineResource>
+</onLine>
+<onLine>
+<CI_OnlineResource>
+<linkage>
+<URL>http://gfw2-data.s3.amazonaws.com/country/bra/zip/bra_biomes.zip</URL>
+</linkage>
+<name>
+<gco:CharacterString>Direct Download</gco:CharacterString>
+</name>
+<function>
+<CI_OnLineFunctionCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_OnLineFunctionCode" codeListValue="download" codeSpace="ISOTC211/19115">download</CI_OnLineFunctionCode>
+</function>
+</CI_OnlineResource>
+</onLine>
+<onLine>
+<CI_OnlineResource>
+<linkage>
+<URL>http://gfw2-data.s3.amazonaws.com/country/bra/zip/bra_biomes.zip</URL>
+</linkage>
+<name>
+<gco:CharacterString>Direct Download</gco:CharacterString>
+</name>
+<function>
+<CI_OnLineFunctionCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_OnLineFunctionCode" codeListValue="download" codeSpace="ISOTC211/19115">download</CI_OnLineFunctionCode>
+</function>
+</CI_OnlineResource>
+</onLine>
+<onLine>
+<CI_OnlineResource>
+<linkage>
+<URL>http://gfw2-data.s3.amazonaws.com/country/bra/zip/bra_biomes.zip</URL>
+</linkage>
+<name>
+<gco:CharacterString>Direct Download</gco:CharacterString>
+</name>
+<function>
+<CI_OnLineFunctionCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_OnLineFunctionCode" codeListValue="download" codeSpace="ISOTC211/19115">download</CI_OnLineFunctionCode>
+</function>
+</CI_OnlineResource>
+</onLine>
+<onLine>
+<CI_OnlineResource>
+<linkage>
+<URL>http://gfw2-data.s3.amazonaws.com/country/bra/zip/bra_biomes.zip</URL>
+</linkage>
+<name>
+<gco:CharacterString>Direct Download</gco:CharacterString>
+</name>
+<function>
+<CI_OnLineFunctionCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_OnLineFunctionCode" codeListValue="download" codeSpace="ISOTC211/19115">download</CI_OnLineFunctionCode>
+</function>
+</CI_OnlineResource>
+</onLine>
+<onLine>
+<CI_OnlineResource>
+<linkage>
+<URL>http://gfw2-data.s3.amazonaws.com/country/bra/zip/bra_biomes.zip</URL>
+</linkage>
+<name>
+<gco:CharacterString>Direct Download</gco:CharacterString>
+</name>
+<function>
+<CI_OnLineFunctionCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_OnLineFunctionCode" codeListValue="download" codeSpace="ISOTC211/19115">download</CI_OnLineFunctionCode>
+</function>
+</CI_OnlineResource>
+</onLine>
+<onLine>
+<CI_OnlineResource>
+<linkage>
+<URL>http://gfw2-data.s3.amazonaws.com/country/bra/zip/bra_biomes.zip</URL>
+</linkage>
+<name>
+<gco:CharacterString>Direct Download</gco:CharacterString>
+</name>
+<function>
+<CI_OnLineFunctionCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_OnLineFunctionCode" codeListValue="download" codeSpace="ISOTC211/19115">download</CI_OnLineFunctionCode>
+</function>
+</CI_OnlineResource>
+</onLine>
+<onLine>
+<CI_OnlineResource>
+<linkage>
+<URL>http://gfw2-data.s3.amazonaws.com/country/bra/zip/bra_biomes.zip</URL>
+</linkage>
+<name>
+<gco:CharacterString>Direct Download</gco:CharacterString>
+</name>
+<function>
+<CI_OnLineFunctionCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_OnLineFunctionCode" codeListValue="download" codeSpace="ISOTC211/19115">download</CI_OnLineFunctionCode>
+</function>
+</CI_OnlineResource>
+</onLine>
+<onLine>
+<CI_OnlineResource>
+<linkage>
+<URL>http://gfw2-data.s3.amazonaws.com/country/bra/zip/bra_biomes.zip</URL>
+</linkage>
+<name>
+<gco:CharacterString>Direct Download</gco:CharacterString>
+</name>
+<function>
+<CI_OnLineFunctionCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_OnLineFunctionCode" codeListValue="download" codeSpace="ISOTC211/19115">download</CI_OnLineFunctionCode>
+</function>
+</CI_OnlineResource>
+</onLine>
+<onLine>
+<CI_OnlineResource>
+<linkage>
+<URL>http://gfw2-data.s3.amazonaws.com/country/bra/zip/bra_biomes.zip</URL>
+</linkage>
+<name>
+<gco:CharacterString>Direct Download</gco:CharacterString>
+</name>
+<function>
+<CI_OnLineFunctionCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_OnLineFunctionCode" codeListValue="download" codeSpace="ISOTC211/19115">download</CI_OnLineFunctionCode>
+</function>
+</CI_OnlineResource>
+</onLine>
+<onLine>
+<CI_OnlineResource>
+<linkage>
+<URL>http://gfw2-data.s3.amazonaws.com/country/bra/zip/bra_biomes.zip</URL>
+</linkage>
+<name>
+<gco:CharacterString>Direct Download</gco:CharacterString>
+</name>
+<function>
+<CI_OnLineFunctionCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_OnLineFunctionCode" codeListValue="download" codeSpace="ISOTC211/19115">download</CI_OnLineFunctionCode>
+</function>
+</CI_OnlineResource>
+</onLine>
+<onLine>
+<CI_OnlineResource>
+<linkage>
+<URL>http://gfw2-data.s3.amazonaws.com/country/bra/zip/bra_biomes.zip</URL>
+</linkage>
+<name>
+<gco:CharacterString>Direct Download</gco:CharacterString>
+</name>
+<function>
+<CI_OnLineFunctionCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_OnLineFunctionCode" codeListValue="download" codeSpace="ISOTC211/19115">download</CI_OnLineFunctionCode>
+</function>
+</CI_OnlineResource>
+</onLine>
+<onLine>
+<CI_OnlineResource>
+<linkage>
+<URL>http://gfw2-data.s3.amazonaws.com/country/bra/zip/bra_biomes.zip</URL>
+</linkage>
+<name>
+<gco:CharacterString>Direct Download</gco:CharacterString>
+</name>
+<function>
+<CI_OnLineFunctionCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_OnLineFunctionCode" codeListValue="download" codeSpace="ISOTC211/19115">download</CI_OnLineFunctionCode>
+</function>
+</CI_OnlineResource>
+</onLine>
+<onLine>
+<CI_OnlineResource>
+<linkage>
+<URL>http://gfw2-data.s3.amazonaws.com/country/bra/zip/bra_biomes.zip</URL>
+</linkage>
+<name>
+<gco:CharacterString>Direct Download</gco:CharacterString>
+</name>
+<function>
+<CI_OnLineFunctionCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_OnLineFunctionCode" codeListValue="download" codeSpace="ISOTC211/19115">download</CI_OnLineFunctionCode>
+</function>
+</CI_OnlineResource>
+</onLine>
+<onLine>
+<CI_OnlineResource>
+<linkage>
+<URL>http://gfw2-data.s3.amazonaws.com/country/bra/zip/bra_biomes.zip</URL>
+</linkage>
+<name>
+<gco:CharacterString>Direct Download</gco:CharacterString>
+</name>
+<function>
+<CI_OnLineFunctionCode codeList="http://www.isotc211.org/2005/resources/Codelist/gmxCodelists.xml#CI_OnLineFunctionCode" codeListValue="download" codeSpace="ISOTC211/19115">download</CI_OnLineFunctionCode>
+</function>
+</CI_OnlineResource>
+</onLine>
+</MD_DigitalTransferOptions>
+</transferOptions>
+</MD_Distribution>
+</distributionInfo>
+<dataQualityInfo>
+<DQ_DataQuality>
+<scope gco:nilReason="missing"/>
+<lineage>
+<LI_Lineage>
+<source>
+<LI_Source>
+<description>
+<gco:CharacterString>Ministerio do Meio Ambiente / IGBE</gco:CharacterString>
+</description>
+<sourceReferenceSystem>
+<MD_ReferenceSystem>
+<referenceSystemIdentifier>
+<RS_Identifier>
+<authority>
+<CI_Citation>
+<title gco:nilReason="missing"/>
+<date gco:nilReason="missing"/>
+</CI_Citation>
+</authority>
+<code gco:nilReason="missing"/>
+</RS_Identifier>
+</referenceSystemIdentifier>
+</MD_ReferenceSystem>
+</sourceReferenceSystem>
+</LI_Source>
+</source>
+</LI_Lineage>
+</lineage>
+</DQ_DataQuality>
+</dataQualityInfo>
+</MD_Metadata>
