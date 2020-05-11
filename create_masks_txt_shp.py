@@ -219,11 +219,12 @@ def main():
     parser.add_argument("--template_var",  help="The template variable")
     parser.add_argument("--latname", default="lat", help="The latitude name in the template file, default = 'lat'")
     parser.add_argument("--lonname", default="lon", help="The longitude name in the template file, default = 'lon'")
+    parser.add_argument("--field_list", default=None, nargs='+', help="Optionally specify a list (subset) of fields to create masks for, otherwise masks will be created covering all fields")
     args = parser.parse_args()
 
-
+    print(args.field_list)
     # Create mask for each layer in shapefile
-    create_masks(args.f_grid,args.shapefile,args.shapefield,latname=args.latname,lonname=args.lonname,template_var=args.template_var,plot=True, netcdf_out=True)
+    create_masks(args.f_grid,args.shapefile,args.shapefield,field_list=args.field_list,latname=args.latname,lonname=args.lonname,template_var=args.template_var,plot=True, netcdf_out=True)
 
 #Washerboard function that allows main() to run on running this file
 if __name__=='__main__':
