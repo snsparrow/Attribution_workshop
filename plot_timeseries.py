@@ -68,12 +68,12 @@ def plot_distribution(variable,data,sm,em,fig):
     if s!=e:
         plt.title("(a) "+variable+" "+sm+"-"+em+" mean")
         sel_vals=vals[:,s:e]
+        # Change np.mean to np.max or np.min as required.
+        sel_plot=np.mean(sel_vals,1)
     else:
         plt.title("(a) "+variable+" "+sm+" mean")
-        sel_vals=vals[:,s]
+        sel_plot=vals[:,s]
 
-    # Change np.mean to np.max or np.min as required.
-    sel_plot=np.mean(sel_vals,1)
 
     # Plot the data
     sns.distplot(np.array(sel_plot), kde=False,fit=stats.genextreme, color="#00b478",label=variable,fit_kws={"linewidth":2.5,"color":"#00b478"})
@@ -128,11 +128,11 @@ def plot_return_time(variable,data,time,year,dirn,sm,em,fig):
     if s!=e:
         plt.title("(d) "+variable+" "+sm+"-"+em+" mean")
         sel_vals=vals[:,s:e]
+        # Change np.mean to np.max or np.min as required.
+        sel_plot=np.mean(sel_vals,1)
     else:
         plt.title("(d) "+variable+" "+sm+" mean")
-        sel_vals=vals[:,s]
-    # Change np.mean to np.max or np.min as required.
-    sel_plot=np.mean(sel_vals,1)
+        sel_plot=vals[:,s]
 
     # Calculate the threshold for the given year.  Adjust the start year of 1979 in the data as required
     threshold=sel_plot[year-1979]
