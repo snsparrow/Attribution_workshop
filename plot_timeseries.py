@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#/usr/bin/env python
 #############################################################################
 # Program : plot_timeseries.py
 # Author  : Sarah Sparrow
@@ -56,7 +56,6 @@ def plot_distribution(variable,data,sm,em,fig):
     ax = plt.subplot2grid((3,4),(0,0)) 
     plt.setp(ax.get_xticklabels(),fontsize=16)
     plt.setp(ax.get_yticklabels(),fontsize=16)
-    plt.title("(a) "+variable+" "+sm+"-"+em+" mean")
 
     # Convert month abbreviation to index
     s=list(calendar.month_abbr).index(sm)
@@ -65,7 +64,14 @@ def plot_distribution(variable,data,sm,em,fig):
     # Reshape the data and mean the chosen months.  
     # Note this reshaping will be different if daily data is used and will need to be amended accordingly.
     vals=np.reshape(data,(-1,12))
-    sel_vals=vals[:,s:e]
+    
+    if s!=e:
+        plt.title("(a) "+variable+" "+sm+"-"+em+" mean")
+        sel_vals=vals[:,s:e]
+    else:
+        plt.title("(a) "+variable+" "+sm+" mean")
+        sel_vals=vals[:,s]
+
     # Change np.mean to np.max or np.min as required.
     sel_plot=np.mean(sel_vals,1)
 
@@ -119,7 +125,12 @@ def plot_return_time(variable,data,time,year,dirn,sm,em,fig):
     s=list(calendar.month_abbr).index(sm)
     e=list(calendar.month_abbr).index(em)
 
-    sel_vals=vals[:,s:e]
+    if s!=e:
+        plt.title("(d) "+variable+" "+sm+"-"+em+" mean")
+        sel_vals=vals[:,s:e]
+    else:
+        plt.title("(d) "+variable+" "+sm+" mean")
+        sel_vals=vals[:,s]
     # Change np.mean to np.max or np.min as required.
     sel_plot=np.mean(sel_vals,1)
 
