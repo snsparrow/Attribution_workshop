@@ -59,50 +59,50 @@ def create_mask(polygons,points,nlat,nlon):
 
 def load_shapefile(shapefile,fieldname,field_list=None):
 	
-	print('Loading Shapefile ',shapefile)
-	driver = ogr.GetDriverByName("ESRI Shapefile")
-	dataSource = driver.Open(shapefile, 0)
-	layer = dataSource.GetLayer()
-	counties={}
-	boundaries=[]
-	types=[]
+    print('Loading Shapefile ',shapefile)
+    driver = ogr.GetDriverByName("ESRI Shapefile")
+    dataSource = driver.Open(shapefile, 0)
+    layer = dataSource.GetLayer()
+    counties={}
+    boundaries=[]
+    types=[]
 
-	layerDefinition = layer.GetLayerDefn()
+    layerDefinition = layer.GetLayerDefn()
+    
+    print("\nShapefile Field Definitions:")
+    for i in range(layerDefinition.GetFieldCount()):
+        print(layerDefinition.GetFieldDefn(i).GetName())
+    print("\nLayers:")
+    for feature in layer:
+        try:
+            region=str(feature.GetField(fieldname))
+        except ValueError:
+            print(feature.items())
+            raise Exception('Error, field "'+fieldname+'" does not exist in the shapefile')
+        print(region)
+        if field_list is not None and region not in field_list:
+            # Skip this region
+            continue
 
-	print("\nShapefile Field Definitions:")
-	for i in range(layerDefinition.GetFieldCount()):
-    		print(layerDefinition.GetFieldDefn(i).GetName())
-	print("\nLayers:")
-	for feature in layer:
-		try:
-			region=feature.GetField(fieldname)
-		except ValueError:
-			print(feature.items())
-			raise Exception('Error, field "'+fieldname+'" does not exist in the shapefile')
-		print(region)
-		if field_list is not None and region not in field_list:
-			# Skip this region
-			continue
 
+        geometry=feature.GetGeometryRef()
+        boundary=eval(feature.geometry().Boundary().ExportToJson())
+        #geometry = json['geometry']
 
-		geometry=feature.GetGeometryRef()
-		boundary=eval(feature.geometry().Boundary().ExportToJson())
-		#geometry = json['geometry']
+        if boundary['type']=='LineString':
+            polygons=[Path(np.array(boundary['coordinates']))]
+        elif boundary['type']=='MultiLineString':
+            polygons=[]
+            for p in boundary['coordinates']:
+                polygons.append(Path(np.array(p)))
+        else:
+            print('Error: unknown geometry')
+            continue
 
-		if boundary['type']=='LineString':
-			polygons=[Path(np.array(boundary['coordinates']))]
-		elif boundary['type']=='MultiLineString':
-			polygons=[]
-			for p in boundary['coordinates']:
-				polygons.append(Path(np.array(p)))
-		else:
-			print('Error: unknown geometry')
-			continue
-
-		if region is not None and boundary is not None:
-			counties[region]=polygons
+        if region is not None and boundary is not None:
+            counties[region]=polygons
 	
-	return counties
+    return counties
 
 ################################################################################
 		
