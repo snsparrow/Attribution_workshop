@@ -24,10 +24,9 @@ def read_data(var,fname):
     vals=np.array(vals.flatten())
     return vals
 
-def q_q_plot(obs, ens, p_tiles,var):
+def q_q_plot(obs, ens, p_tiles,ptitle):
     sp = plt.subplot2grid((1,1),(0,0))
-    units={"pr":"($mm day^{-1}$)","T":"($K$)"}
-    plt.title(var+"  "+units[var])
+    plt.title(ptitle)
     # plot the (non-conditional) quantiles
     obs_quantiles = []
     ens_quantiles = []
@@ -68,7 +67,7 @@ def main():
     parser.add_argument("--model_var", help="The model variable name")
     parser.add_argument("--obs_file", help="The netCDF file containing the observations")
     parser.add_argument("--model_file", help="The netCDF file containing the model output") 
-
+    parser.add_argument("--plot_title", default="", help="Title string for plot")
     args = parser.parse_args()
 
     # Set up the plot
@@ -82,7 +81,7 @@ def main():
     dataObs=read_data(args.obs_var,args.obs_file)
     dataModel=read_data(args.model_var, args.model_file)
     
-    q_q_plot(dataObs, dataModel, [5,10,25,50,75,90,95],var)
+    q_q_plot(dataObs, dataModel, [5,10,25,50,75,90,95],args.plot_title)
     plt.tight_layout()
     fig.savefig(args.obs_var+"_q_q_plot.png",dpi=28.75*2)
 
