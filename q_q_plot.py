@@ -25,7 +25,7 @@ def read_data(var,fname):
     return vals
 
 def q_q_plot(obs, ens, p_tiles):
-    sp = plt.subplot(111)
+    sp = plt.subplot2grid((1,1),(0,0))
     # plot the (non-conditional) quantiles
     obs_quantiles = []
     ens_quantiles = []
