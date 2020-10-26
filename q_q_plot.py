@@ -86,7 +86,7 @@ def main():
     
     q_q_plot(dataObs, dataModel, [5,10,25,50,75,90,95])
     plt.tight_layout()
-    fig.savefig("plots/"+args.obs_var+"_q_q_plot.png",dpi=28.75*2)
+    fig.savefig(args.obs_var+"_q_q_plot.png",dpi=28.75*2)
 
     print('Finished!')
 
