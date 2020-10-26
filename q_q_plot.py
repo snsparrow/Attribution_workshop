@@ -24,8 +24,10 @@ def read_data(var,fname):
     vals=np.array(vals.flatten())
     return vals
 
-def q_q_plot(obs, ens, p_tiles):
+def q_q_plot(obs, ens, p_tiles,var):
     sp = plt.subplot2grid((1,1),(0,0))
+    units={"pr":"($mm day^{-1}$)","T":"($K$)"}
+    plt.title(var+"  "+units[var])
     # plot the (non-conditional) quantiles
     obs_quantiles = []
     ens_quantiles = []
@@ -75,16 +77,12 @@ def main():
 
     matplotlib.rc('font', **font)
     fig = plt.figure()
-    fig.set_size_inches(21,15)
-
-    units={"pr":"($mm day^{-1}$)","T":"($K$)"}
-
-    plt.title(args.model_var+"  "+units[args.model_var])
+    fig.set_size_inches(10,10)
 
     dataObs=read_data(args.obs_var,args.obs_file)
     dataModel=read_data(args.model_var, args.model_file)
     
-    q_q_plot(dataObs, dataModel, [5,10,25,50,75,90,95])
+    q_q_plot(dataObs, dataModel, [5,10,25,50,75,90,95],var)
     plt.tight_layout()
     fig.savefig(args.obs_var+"_q_q_plot.png",dpi=28.75*2)
 
