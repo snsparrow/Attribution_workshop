@@ -76,7 +76,7 @@ def main():
 
     matplotlib.rc('font', **font)
     fig = plt.figure()
-    fig.set_size_inches(10,10)
+    fig.set_size_inches(6,6)
 
     dataObs=read_data(args.obs_var,args.obs_file)
     dataModel=read_data(args.model_var, args.model_file)
