@@ -51,8 +51,8 @@ def q_q_plot(obs, ens, p_tiles,ptitle):
     sp.plot([smallest_x, largest_x], [smallest_x, largest_x], 'k', lw=2.0,
             zorder=0)
 
-    sp.set_xlabel("Observations",fontsize=24)
-    sp.set_ylabel("Model",fontsize=24)
+    sp.set_xlabel("Observations",fontsize=22)
+    sp.set_ylabel("Model",fontsize=22)
     # limits
     sp.set_xlim([smallest_x, largest_x])
     sp.set_ylim([smallest_x, largest_x])
@@ -76,7 +76,7 @@ def main():
 
     matplotlib.rc('font', **font)
     fig = plt.figure()
-    fig.set_size_inches(6,6)
+    fig.set_size_inches(8,8)
 
     dataObs=read_data(args.obs_var,args.obs_file)
     dataModel=read_data(args.model_var, args.model_file)
