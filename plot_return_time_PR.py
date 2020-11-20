@@ -18,14 +18,16 @@ from calc_PR import *
 
 def read_data(fname,restore):
     # Read or restore the data
-#    if restore:
-    vals=np.load(fname)
- #   else:
- #       # Read in the dataset
- #       infile = open(fname, 'r')
- #       data = [float(line) for line in infile.readlines()]
- #       infile.close()
-        #vals=np.array(data,float)
+    if restore:
+        vals=np.load(fname)
+        # adjust tempture thresholds into C from K
+        vals=vals-273.14
+    else:
+        # Read in the dataset
+        infile = open(fname, 'r')
+        data = [float(line) for line in infile.readlines()]
+        infile.close()
+        vals=np.array(data,float)
 
     return vals.flatten()
 
@@ -38,7 +40,7 @@ def plot_return_time(variable,dataAct,dataNat,threshold,dirn,fig):
     plt.setp(ax.get_xticklabels(),fontsize=16)
     plt.setp(ax.get_yticklabels(),fontsize=16)
     ax.set_xlim(1,1e2)
-    ax.set_ylim(0.0, 8000.0)
+    ax.set_ylim(25.0, 40.0)
 
     # Plot the return time for the historical and historicalNat simulations
     plot_rt(dataAct,["royalblue","cornflowerblue","mediumblue"],"Historical",ax,"both",dirn,threshold,"",'--')
@@ -123,7 +125,7 @@ def plot_PR_rt(PR_median, PR_max,PR_min, ev_periods,act_params,nat_params,fig):
     plt.setp(ax.get_xticklabels(),fontsize=16)
     plt.setp(ax.get_yticklabels(),fontsize=16)
     ax.set_xlim(1,1e2)
-    #ax.set_ylim(0,10)
+    ax.set_ylim(1,32)
 
     labels=['','1/1','1/10','1/100']
     ax.set_xticklabels(labels)
@@ -145,7 +147,7 @@ def plot_PR_rt(PR_median, PR_max,PR_min, ev_periods,act_params,nat_params,fig):
     cdf=stats.genextreme.cdf(rt,nat_params[0],loc=nat_params[1],scale=nat_params[2])
     probNat=1-cdf
     PR=probAct/probNat
-    l2=ax.loglog(T,PR,basey=2,color=cols[1],linewidth=2,zorder=1, label="Log normal fit")
+    l2=ax.loglog(T,PR,basey=2,color=cols[1],linewidth=2,zorder=1, label="GEV fit")
 
     ll=ax.legend(loc="upper left",prop={"size": 14},fancybox=True,numpoints=1)
 
@@ -161,8 +163,8 @@ def plot_PR_threshold(PR_median, PR_max,PR_min, thresholds,variable,act_params, 
     ax.set_xlabel(variable,fontsize=16)
     plt.setp(ax.get_xticklabels(),fontsize=16)
     plt.setp(ax.get_yticklabels(),fontsize=16)
-    ax.set_xlim(0,8000.0)
-    #ax.set_ylim(0,2)
+    ax.set_xlim(25.0,40.0)
+    ax.set_ylim(1,32)
 
     ax.grid(b=True,which='major')
     ax.grid(b=True, which='minor',linestyle='--')
@@ -181,7 +183,7 @@ def plot_PR_threshold(PR_median, PR_max,PR_min, thresholds,variable,act_params, 
     cdf=stats.genextreme.cdf(rt,nat_params[0],loc=nat_params[1],scale=nat_params[2])
     probNat=1-cdf
     PR=probAct/probNat
-    l2=ax.semilogy(rt,PR,basey=2,color=cols[1],linewidth=2,zorder=1, label='Log normal fit')
+    l2=ax.semilogy(rt,PR,basey=2,color=cols[1],linewidth=2,zorder=1, label='GEV fit')
 
     xmin,xmax=ax.get_xlim() 
     ymin,ymax=ax.get_ylim()
@@ -203,7 +205,7 @@ def main():
     parser.add_argument("--fname_act", help="The filename including path to the historical (actual) data.")
     parser.add_argument("--fname_nat", help="The filename including path to the historicalNat (natural) data.")
     parser.add_argument("--variable",  help="The variable name")
-    parser.add_argument("--threshold", type=int, help="The year of interest that the extreme event ocurred in")
+    parser.add_argument("--threshold", type=float, help="The year of interest that the extreme event ocurred in")
     parser.add_argument("--dirn", default="descending", help="The direction of the variable.  'Descending' for a variable where the threshold is exceeded (default) and 'ascending' where the threshold is less than a given value.")
     parser.add_argument("--restore", action="store_true", help="Restore the data")
     args = parser.parse_args()
@@ -222,7 +224,9 @@ def main():
     plot_return_time(args.variable,dataAct,dataNat,args.threshold,args.dirn,fig)
 
     PR_median, PR_max,PR_min, ev_periods, thresholds=get_PR_data(dataAct,dataNat,'example_data',args.restore)
-   
+    # adjust tempture thresholds into C from K
+    thresholds=thresholds-273.14
+
     act_params=stats.genextreme.fit(dataAct)
     nat_params=stats.genextreme.fit(dataNat)
 
