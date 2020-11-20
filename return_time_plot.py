@@ -3,6 +3,7 @@
 # Program : return_time_plot.py
 # Author  : Neil Massey
 # Date    : 23/01/12
+#           20/11/20 Sarah Sparrow: Addition of calc_bootstrap_ensemble 
 # Purpose : plot return time periods
 ###############################################################################
 
@@ -32,6 +33,26 @@ def calc_return_times(em, direction="ascending", period=1):
 	ex_data = val / numpy.array(ranks, dtype=numpy.float32)
 	return ey_data, ex_data
 
+###############################################################################
+def calc_bootstrap_ensemble(em, direction="ascending", bsn=1e5, slen=0):
+        # bsn = boot strap number, number of times to resample the distribution
+        ey_data = em.flatten()
+        if slen==0:
+                slen=ey_data.shape[0]
+        # create the store
+        sample_store = numpy.zeros((int(bsn), int(slen)), 'f')
+        # do the resampling
+        for s in range(0, int(bsn)):
+                t_data = numpy.zeros((slen), 'f')
+                for y in range(0, slen):
+                        x = random.uniform(0, slen)
+                        t_data[y] = ey_data[int(x)]
+                t_data.sort()
+                # reverse if necessary
+                if direction == "descending":
+                        t_data = t_data[::-1]
+                sample_store[s] = t_data
+        return sample_store
 ###############################################################################
 
 def calc_return_time_confidences(em, direction="ascending", c=[0.05, 0.95], bsn=1e5):
