@@ -40,7 +40,7 @@ def plot_return_time(variable,dataAct,dataNat,threshold,dirn,fig):
     plt.setp(ax.get_xticklabels(),fontsize=16)
     plt.setp(ax.get_yticklabels(),fontsize=16)
     ax.set_xlim(1,1e2)
-    ax.set_ylim(25.0, 40.0)
+    ax.set_ylim(28.0, 38.0)
 
     # Plot the return time for the historical and historicalNat simulations
     plot_rt(dataAct,["royalblue","cornflowerblue","mediumblue"],"Historical",ax,"both",dirn,threshold,"",'--')
@@ -127,9 +127,6 @@ def plot_PR_rt(PR_median, PR_max,PR_min, ev_periods,act_params,nat_params,fig):
     ax.set_xlim(1,1e2)
     ax.set_ylim(1,32)
 
-    labels=['','1/1','1/10','1/100']
-    ax.set_xticklabels(labels)
-
     ax.grid(b=True,which='major')
     ax.grid(b=True, which='minor',linestyle='--')
 
@@ -151,6 +148,9 @@ def plot_PR_rt(PR_median, PR_max,PR_min, ev_periods,act_params,nat_params,fig):
 
     ll=ax.legend(loc="upper left",prop={"size": 14},fancybox=True,numpoints=1)
 
+    labels=['','1/1','1/10','1/100']
+    ax.set_xticklabels(labels)
+
     plt.tight_layout()
 
 def plot_PR_threshold(PR_median, PR_max,PR_min, thresholds,variable,act_params, nat_params,flevel,fig):
@@ -163,7 +163,7 @@ def plot_PR_threshold(PR_median, PR_max,PR_min, thresholds,variable,act_params, 
     ax.set_xlabel(variable,fontsize=16)
     plt.setp(ax.get_xticklabels(),fontsize=16)
     plt.setp(ax.get_yticklabels(),fontsize=16)
-    ax.set_xlim(25.0,40.0)
+    ax.set_xlim(28.0,38.0)
     ax.set_ylim(1,32)
 
     ax.grid(b=True,which='major')
