@@ -41,7 +41,7 @@ def q_q_plot(obs, ens, p_tiles,ptitle):
         obs_p = stats.scoreatpercentile(obs.flatten(), p)
         ens_p = stats.scoreatpercentile(ens.flatten(), p)
         sp.plot(obs_p, ens_p, 'r+', ms=12, zorder=1)
-        sp.text(obs_p+0.03*obs_range, ens_p-0.03*ens_range, str(p),c='r', ha='center', va='bottom',
+        sp.text(obs_p+0.04*obs_range, ens_p-0.04*ens_range, str(p),c='r', ha='center', va='bottom',
                 zorder=1, fontsize=18)
 
     smallest_x = np.min([obs_quantiles[0], ens_quantiles[0]])
