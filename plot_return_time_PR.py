@@ -105,8 +105,9 @@ def plot_rt(data,cols,plabel,ax,errb,dirn,threshold,tlabel,tstyle):
     ax.semilogx([xmin,xmax],[threshold,threshold],color="Grey",linestyle=tstyle,linewidth=2.5,label=tlabel, zorder=2)
     nidx=find_nearest(y_data_all,threshold)
     ax.axvspan(conf_all_x_5[nidx],conf_all_x_95[nidx],ymin=0,ymax=(threshold-ymin)/(ymax-ymin),facecolor='silver',edgecolor=cols[2],linewidth=2.,alpha=0.3,zorder=0)
-
-    # Reeturn the fit parameters
+    print(plabel+" return time with 5-95% range: "+str(x_data_all[nidx])+" ("+str(conf_all_x_5[nidx])+" "+str(conf_all_x_95[nidx])+")")
+   
+    # Return the fit parameters
     return [shape,loc,scale]
 
 def find_nearest(array,value):
